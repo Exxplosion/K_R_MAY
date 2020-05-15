@@ -24,8 +24,8 @@ void itoa(int n, char s[])
     i = 0;
     do
     {                          /* генерируем цифры в обратном порядке */
-        s[i++] = n % 4 + '0'; /* берем следующую цифру */
-    } while ((n /= 4) > 0);   /* удаляем */
+        s[i++] = n % 5 + '0'; /* берем следующую цифру */
+    } while ((n /= 5) > 0);   /* удаляем */
     if (sign < 0)
         s[i++] = '-';
     s[i] = '\0';
@@ -37,12 +37,13 @@ void itoa(int n, char s[])
 int main (int argc, char *argv[])
 {
     const int size = argc - 2;
-
+    printf(" HAHA %d\n", size);
     char *operation_arr = (char *)calloc(size - 1, sizeof(char));
     char *new_ar = (char *)calloc(2*size -1, sizeof(char));
 
     int sum = 0;
-    while (sum < pow(4, size-1))
+
+    while (sum < pow(5, size-1))
     {
         itoa(sum, operation_arr);
         for (int i = 0; i < size-1; i++)
@@ -75,6 +76,9 @@ int main (int argc, char *argv[])
                     break;
                 case '3':
                     new_ar[i] = '*';
+                    break;
+                default:
+                    new_ar[i] = '~';
                     break;
                 }
                 l++;
