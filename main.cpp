@@ -93,13 +93,13 @@ int main (int argc, char *argv[])
         if(atoi(argv[1]) == res_sum)
         {
             found = true;
-            printf("\nFOUND :\n");
+            //printf("\nFOUND :\n");
             for (int i = 0; i < 2 * size - 1; i++)
             {
                 if (new_ar[i] != '~')
                     printf("%c", new_ar[i]);
             }
-            printf( " = %d", res_sum);
+            printf( " = %d\n", res_sum);
             //return 0;
         }
         sum++;
