@@ -32,12 +32,14 @@ void itoa(int n, char s[])
     reverse(s);
 }
 
+bool found = false;
+
 
 
 int main (int argc, char *argv[])
 {
     const int size = argc - 2;
-    printf(" HAHA %d\n", size);
+    //printf(" HAHA %d\n", size);
     char *operation_arr = (char *)calloc(size - 1, sizeof(char));
     char *new_ar = (char *)calloc(2*size -1, sizeof(char));
 
@@ -84,22 +86,24 @@ int main (int argc, char *argv[])
                 l++;
             }
         }
-        printf("%s", new_ar);
+        //printf("%s", new_ar);
 
         int res_sum = getG(new_ar);
-        printf(" = %d\n", res_sum);
+        //printf(" = %d\n", res_sum);
         if(atoi(argv[1]) == res_sum)
         {
-            printf("FOUND :\n");
+            found = true;
+            printf("\nFOUND :\n");
             for (int i = 0; i < 2 * size - 1; i++)
             {
                 if (new_ar[i] != '~')
                     printf("%c", new_ar[i]);
             }
             printf( " = %d", res_sum);
-            return 0;
+            //return 0;
         }
         sum++;
     }
-    printf("not found!");
+    if (!(found))
+        printf("not found!");
 }
