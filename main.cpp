@@ -15,8 +15,9 @@ void reverse(char s[])
     }
 }
 
-void itoa(int n, char s[])
+void itoa(int n, char s[], int size)
 {
+    int n_cpy = n;
     int i, sign;
 
     if ((sign = n) < 0) /* записываем знак */
@@ -24,11 +25,15 @@ void itoa(int n, char s[])
     i = 0;
     do
     {                          /* генерируем цифры в обратном порядке */
-        s[i++] = n % 5 + '0'; /* берем следующую цифру */
-    } while ((n /= 5) > 0);   /* удаляем */
+        s[i++] = n % 4 + '0'; /* берем следующую цифру */
+    } while ((n /= 4) > 0);   /* удаляем */
     if (sign < 0)
         s[i++] = '-';
-    s[i] = '\0';
+    if (n_cpy < pow(4, size - 2))
+    {
+        //printf("lol!, %d\n", n);
+        s[i] = '0';
+    }
     reverse(s);
 }
 
@@ -42,17 +47,22 @@ int main (int argc, char *argv[])
     //printf(" HAHA %d\n", size);
     char *operation_arr = (char *)calloc(size - 1, sizeof(char));
     char *new_ar = (char *)calloc(2*size -1, sizeof(char));
+    char *oper_arr = (char *)calloc(size - 1, sizeof(char));
 
-    int sum = 0;
+ 
+        int sum = 0;
 
-    while (sum < pow(5, size-1))
-    {
-        itoa(sum, operation_arr);
-        for (int i = 0; i < size-1; i++)
+        while (sum < pow(4, size - 1))
         {
-            if (operation_arr[i] == '\0')
-                operation_arr[i] = '0';
-        }
+            for (int i = 0; i < size - 1; i++)
+            {
+                oper_arr[i] = '0';
+            }
+            itoa(sum, oper_arr, size);
+            //printf("RESULT: %s\n", operation_arr);
+
+        oper_arr[size] = '\0';
+        //printf("RESULT2: %s\n", oper_arr);
 
         int j = 0;
         int l = 0;
@@ -65,7 +75,7 @@ int main (int argc, char *argv[])
             }
             else
             {
-                switch (operation_arr[l])
+                switch (oper_arr[l])
                 {
                 case '0':
                     new_ar[i] = '~';
@@ -106,4 +116,4 @@ int main (int argc, char *argv[])
     }
     if (!(found))
         printf("not found!");
-}
+    }
